@@ -26,7 +26,7 @@ contract('AidaICO', function(accounts) {
   };
 
   var ContractAddress;
-  var returnDuration = 13 * 24 * 60 * 60;
+  var returnDuration = 10 * 24 * 60 * 60;
 
   it("should set rate correctly", function() {
 
@@ -661,29 +661,6 @@ contract('AidaICO', function(accounts) {
     });
   });
 
-
-  // it("should send tokens, when investor sends ether to contract", function() {
-  //
-  //   return AidaICO.deployed().then(function(instance) {
-  //     ContractAddress = instance;
-  //     return ContractAddress.sendTransaction({
-  //       from: accounts[8],
-  //       value: 7000000000000000000
-  //     });
-  //   }).then(function() {
-  //     return ContractAddress.AID.call();
-  //   }).then(function(token) {
-  //     AID = AIDA.at(token);
-  //     return AID.balanceOf.call(accounts[8]);
-  //   }).then(function(result) {
-  //     console.log(result + " current balance of accounts[8]");
-  //     assert.isAtLeast(result, 1, "didn't mint tokens");
-  //     return AID.totalSupply.call();
-  //   }).then(function(supply) {
-  //     console.log(supply + " current totalSupply");
-  //   });
-  // });
-
   it("shouldn't withdraw ether", function() {
     var flag = 0;
 
@@ -725,15 +702,6 @@ contract('AidaICO', function(accounts) {
       }
     });
   });
-
-  it("ugiugi", function() {
-    return AidaICO.deployed().then(function(instance) {
-      ContractAddress = instance;
-      return ContractAddress.daysFromIcoStart();
-    }).then(function(days) {
-      console.log("Days before withdraw: " + days);
-    })
-  })
 
   it("should withdraw ether", function() {
     return AidaICO.deployed().then(function(instance) {
