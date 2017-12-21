@@ -703,22 +703,6 @@ contract('AidaICO', function(accounts) {
     });
   });
 
-  it("should withdraw ether", function() {
-    return AidaICO.deployed().then(function(instance) {
-      ContractAddress = instance;
-      return ContractAddress.withdrawEther(web3.toWei(7, "ether"), {
-        from: accounts[3]
-      });
-    }).then(function(result) {
-      console.log(result);
-    }).then(function() {
-      return web3.eth.getBalance(ContractAddress.address);
-    }).then(function(balance) {
-      balance = JSON.parse(balance);
-      console.log(balance + " balance of our contract");
-      assert.equal(balance, 0, "doesn't withdraw ether right")
-    })
-  });
 
   it("should finish ICO", function() {
 
@@ -737,6 +721,25 @@ contract('AidaICO', function(accounts) {
     });
 
   });
+
+
+    it("should withdraw ether", function() {
+    return AidaICO.deployed().then(function(instance) {
+      ContractAddress = instance;
+      return ContractAddress.withdrawEther(web3.toWei(7, "ether"), {
+        from: accounts[3]
+      });
+    }).then(function(result) {
+      console.log(result);
+    }).then(function() {
+      return web3.eth.getBalance(ContractAddress.address);
+    }).then(function(balance) {
+      balance = JSON.parse(balance);
+      console.log(balance + " balance of our contract");
+      assert.equal(balance, 0, "doesn't withdraw ether right")
+    })
+  });
+
 
   it("shouldn't send tokens, when investor sends ether to contract", function() {
     var flag = 0;

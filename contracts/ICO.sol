@@ -443,7 +443,7 @@ contract AidaICO {
     *   @param _value        amount of ETH to send in Wei
     */
     function withdrawEther(uint256 _value) external managerOnly {
-        require(daysFromIcoStart() > ICO_RETURN_DURATION);
+        require(statusICO == StatusICO.PreIcoFinished || statusICO == StatusICO.IcoFinished);
         Company.transfer(_value);
     }
 
