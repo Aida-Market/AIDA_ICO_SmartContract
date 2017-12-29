@@ -1,18 +1,20 @@
 # Aida ICO Contract
 
-Please see below description of Aida ICO smart contract developed by [Phenom.Team][phenom].
-[AIDA Market Crowdsale][aidamarket]. This is a first ever contract based upon the new concept outlined by Vitalik Buterin when investors can revoke their deposits before the end of the ICO
+![Aida Token](images/logo.png)	
+
+Please see below description of [Aida ICO][aidamarket] smart contract developed by [Phenom.Team][phenom].
+This is a first ever contract based upon the new concept outlined by Vitalik Buterin when investors can revoke their deposits before the end of the ICO
 
 ## Overview
-AID Token smart-contract is structured upon ![ERC20 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). 
-One of distinctive features of the smart-contract is the fact that token price is fixed and pegged to USD instead of ETH which protects investors from volatility risks of ETH currency. This technical feature is made possible by usage of Oracle that updates ETH/USD actual exchange rate every 30 minutes. The token price is set to $0.25 apiece.
+AID Token smart-contract is structured upon [ERC20 standard](erc20). 
+One of distinctive features of the smart-contract is the fact that token price is fixed and pegged to USD instead of ETH which protects investors from volatility risks of ETH currency. This technical feature is made possible by usage of Oracle that updates ETH/USD actual exchange rate in the smart contract every 30 minutes. The token price is set to $0.25 apiece.
 
-Ethereum is not the only currency investors can use when investing, they can also opt to purchase AID tokens with BTC, LTC, BCC and even USD (in debit cards). Processing of transactions in these currencies is enabled by automated platform, which processes every single incoming transaction in USD equivalent. It also tracks number of verifications of a single transaction and emits tokens headed to Ethereum address of an investor. Emission itself is processed by bringing up of buyForInvestor method directly from cotroller-addresses (controllersOnly). In order to ensure the real-time emission of AID tokens, a unique sharded  technology by  [Phenom.Team][phenom] is used. The basics of the technology boils down to the procedure wherein the whole emission process is distributed among three controller-addresses, which allows for real-time emission of tokens even when the whole Ethereum network is overloaded.
+Ethereum is not the only currency investors can use when investing, they can also opt to purchase AID tokens with BTC, LTC, BCC and even USD (in debit cards). Processing of transactions in these currencies is enabled by automated platform, which processes every single incoming transaction and calculates it's USD equivalent. It also tracks number of confirmations of every single transaction and emits tokens to Ethereum address of an investor, he specified in his personal profile web page. Emission itself is processed by bringing up of buyForInvestor method directly from cotroller-addresses (controllersOnly). In order to ensure smooth real-time emission of AID tokens, a unique sharding technology developed by  [Phenom.Team][phenom] is used. The basics of the technology boils down to the procedure wherein the whole emission process is distributed among three controller-addresses, which allows to perform fast real-time token emission  even when the whole Ethereum network is overloaded.
 
-AidaIco is the first smart-contract which is structured and based upon the concept outlined by Vitalik Buterin:
+AidaIco is the first smart-contract which is structured and based upon the concept outlined by Vitalik Buterin when investors can revoke their deposits:
 
--	For ETH investments: all tokens stashed on investor’s address get burned and forwared back to investor’s wallet from AidaIco smart-contract.
--	BTC, LTC, BCC investments: refund process if powered by Oracle. The investment amount get refunded back to investor’s wallet, minus transaction fee.
+-	For ETH investments: all tokens stashed on investor’s address get burned and invested ETH forwared back to investor’s wallet from AidaIco smart-contract.
+-	BTC, LTC, BCC investments: refund process sf powered by Oracle. The investment amount get refunded back to investor’s wallet, minus transaction fee.
 -	Withdrawal lock  – during the main stage of the ICO refund is possible only till 30th January 2018, inclusive. 
 
 ## The Crowdsale Specification
@@ -32,79 +34,79 @@ AidaIco is the first smart-contract which is structured and based upon the conce
 ```cs
 function() external payable
 ```
-Fallback function calls createTokensForEth(address _investor, uint256 _aidValue) function to create tokens when investor sends ETH to address of ICO contract.
+Fallback function calls createTokensForEth(address _investor, uint256 _aidValue) function to create tokens when investor sends ETH directly to ICO smart contract address.
 
-**getRate**
+**setRate**
 ```cs
 function setRate(uint256 _RateEth) external oracleOnly
 ```
-Sets rate of ETH and update token price.
+Set ETH/USD exchange rate and update token price.
 
 **startPreIco**
 ```cs
 function startPreIco() external managerOnly
 ```
-Sets ICO status to PreIcoStarted.
+Set ICO status to PreIcoStarted.
 
 **pausePreIco**
 ```cs
 function pausePreIco() external managerOnly
 ```
-Sets Ico status to PreIcoPaused.
+Set Ico status to PreIcoPaused.
 
 **finishPreIco**
 ```cs
 function finishPreIco() external managerOnly
 ```
-Sets ICO status to PreIcoFinished.
+Set ICO status to PreIcoFinished.
 
 **startIco**
 ```cs
 function startIco() external managerOnly
 ```
-Sets ICO status to IcoStarted.
+Set ICO status to IcoStarted.
 
 **pauseIco**
 ```cs
 function startIco() external managerOnly
 ```
-Sets ICO status to IcoPaused.
+Set ICO status to IcoPaused.
 
 **finishIco**
 ```cs
 function finishIco() external managerOnly
 ```
-Finishes ICO and emit tokens for bounty company, partners and team.
+Finish ICO and allocate tokens for bounty company, partners and team pools.
 
 **enableTokensTransfer**
 ```cs
 function enableTokensTransfer() external managerOnly
 ```
-Unfreezes tokens(enable token transfers).
+Unfreezes tokens (enable token transfers).
 
 **rememberEther**
 ```cs
 function rememberEther(uint256 _value, address _investor) internal
 ```
-Stores how many eth were invested by investor.
+Stores amount invested from specific address.
 
 **rememberTokensEth**
 ```cs
 function rememberTokensEth(uint256 _value, address _investor) internal
 ```
-Stores how many tokens investor received(for purchases in ETH).
+Stores amount of AID tokens investor received (for ETH purchases).
 
 **rememberTokensOtherCrypto**
 ```cs
 function rememberTokensOtherCrypto(uint256 _value, address _investor) internal
 ```
-Stores how many tokens investor received(for purchases in other cryptocurrencies).
+Stores amount of AID tokens investor received (for purchases in BTC, LTC, BCC).
 
 **buyForInvestor**
 ```cs
 function buyForInvestor(address _investor,uint256 _aidValue,string _txHash) external controllersOnly
 ```
-buyForInvestor function calls by one of controllers createTokensForOtherCrypto(address _investor, uint256 _aidValue) function to create tokens when investor made purchase in other cryptocurrencies.
+buyForInvestor function is called by one of controllers createTokensForOtherCrypto(address _investor, uint256 _aidValue) function to allocate tokens to investors who make a deposit in non-ETH currencies.
 
 **createTokensForOtherCrypto**
 ```cs
@@ -122,13 +124,13 @@ Issue tokens for investors who paid in ETH.
 ```cs
 function getBonus(uint256 _value) public constant returns(uint256)
 ```
-Calculates bonus if PreIco sales still not over.
+get current bonus
 
 **daysFromIcoStart**
 ```cs
 function daysFromIcoStart() public constant returns(uint256)
 ```
-Counts days from Ico start day.
+Count days from Ico start day.
 
 **returnEther**
 ```cs
@@ -141,13 +143,13 @@ Allows investors to return their investments(in ETH) if preICO or ICO_RETURN_DUR
 ```cs
 function returnOtherCrypto(address _investor, string _logString) external refundManagerOnly
 ```
-This calls by refund manager to burn tokens of investors who returned their investments in other cryptocurrencies.
+This method is called by refund manager to burn tokens of investors who want to revoke their investments in other cryptocurrencies.
 
 **withdrawEther**
 ```cs
 function withdrawEther(uint256 _value) external managerOnly
 ```
-Allows Company withdraw investments when ICO_RETURN_DURATION is over
+Allows Company withdrawing investments when ICO_RETURN_DURATION is over
 
 #### AidaIco Events
 
@@ -199,3 +201,4 @@ event LogReturnOtherCrypto(address investor, string logString);
 
 [aidamarket]: http://ico.aida.market/index-en.php
 [phenom]: https://phenom.team/
+[erc20]: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md
