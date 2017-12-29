@@ -1,7 +1,5 @@
 # Aida ICO Contract
 
-![Aida Token](images/logo.png)	
-
 Please see below description of [Aida ICO][aidamarket] smart contract developed by [Phenom.Team][phenom].
 This is a first ever contract based upon the new concept outlined by Vitalik Buterin when investors can revoke their deposits before the end of the ICO
 
