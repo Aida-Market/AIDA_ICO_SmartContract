@@ -1,9 +1,11 @@
-# Phenom Team
+# Aida ICO Contract
 
-Please see below developed by [Phenom.Team][phenom] smart contract for the [AIDA Market Crowdsale][aidamarket].
+Please see below description of Aida ICO smart contract developed by [Phenom.Team][phenom].
+[AIDA Market Crowdsale][aidamarket]. This is a first ever contract based upon the new concept outlined by Vitalik Buterin when investors can revoke their deposits before the end of the ICO
 
 ## Overview
-One of distinctive features of the smart-contract is the fact that token price is fixed and pegged to USD instead of ETH which protects investors from volatility risks of ETH currency. This technical feature is made possible by usage of Oracle, a platform that brings up setRate every 30 minutes, which in turn transmits ETH/USD actual exchange rate of five top cryptocurrency exchanges as a parameter of the smart-contract. The token price is set to $0.25 apiece.
+AID Token smart-contract is structured upon ![ERC20 standard](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md). 
+One of distinctive features of the smart-contract is the fact that token price is fixed and pegged to USD instead of ETH which protects investors from volatility risks of ETH currency. This technical feature is made possible by usage of Oracle that updates ETH/USD actual exchange rate every 30 minutes. The token price is set to $0.25 apiece.
 
 Ethereum is not the only currency investors can use when investing, they can also opt to purchase AID tokens with BTC, LTC, BCC and even USD (in debit cards). Processing of transactions in these currencies is enabled by automated platform, which processes every single incoming transaction in USD equivalent. It also tracks number of verifications of a single transaction and emits tokens headed to Ethereum address of an investor. Emission itself is processed by bringing up of buyForInvestor method directly from cotroller-addresses (controllersOnly). In order to ensure the real-time emission of AID tokens, a unique sharded  technology by  [Phenom.Team][phenom] is used. The basics of the technology boils down to the procedure wherein the whole emission process is distributed among three controller-addresses, which allows for real-time emission of tokens even when the whole Ethereum network is overloaded.
 
